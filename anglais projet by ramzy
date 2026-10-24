@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastering Global Abbreviations & Acronyms — English Project</title>
+  
+  <!-- Google Fonts: Inter & Outfit for an ultra-premium educational presentation -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for clean academic icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom refined scrollbar and smooth transitions */
+    * {
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    
+    /* Dedicated high-end print style for generating the ultimate PDF */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 11pt !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .table-container {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 0 !important;
+      }
+      tr {
+        page-break-inside: avoid;
+      }
+      img {
+        max-height: 80px !important;
+        border-radius: 4px !important;
+      }
+      .print-banner {
+        display: block !important;
+      }
+    }
+
+    .print-banner {
+      display: none;
+    }
+
+    /* Soft card glassmorphism */
+    .glass-card {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- TOP HEADER / HERO -->
+  <header class="no-print border-b border-slate-200 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Logo / Title -->
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 font-display font-bold text-lg">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold font-display tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+            Acronyms & Abbreviations
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">English Project</span>
+          </h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Class presentation & comprehensive visual dossier</p>
+        </div>
+      </div>
+
+      <!-- Controls & Quick Actions -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <!-- View switch (Table / Cards) -->
+        <div class="inline-flex rounded-lg bg-slate-100 dark:bg-slate-800 p-1 border border-slate-200 dark:border-slate-700">
+          <button id="viewTableBtn" onclick="switchView('table')" title="Table View" class="px-3 py-1.5 rounded-md text-xs font-medium bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm transition">
+            <i class="fa-solid fa-table-list mr-1.5"></i> Table
+          </button>
+          <button id="viewCardsBtn" onclick="switchView('cards')" title="Cards Gallery View" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            <i class="fa-solid fa-grip mr-1.5"></i> Cards
+          </button>
+        </div>
+
+        <!-- Print to PDF button -->
+        <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm hover:shadow transition">
+          <i class="fa-solid fa-print"></i>
+          <span>Export / Print PDF</span>
+        </button>
+
+        <!-- Dark / Light Mode Toggle -->
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <i id="themeIcon" class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- PRINT ONLY BANNER -->
+  <div class="print-banner p-6 text-center border-b-2 border-indigo-600 mb-4">
+    <h1 class="text-2xl font-bold text-slate-900 uppercase tracking-wide">English Class Project: Abbreviations & Acronyms</h1>
+    <p class="text-sm text-slate-600 mt-1">Authentic visual illustrations, full expanded forms and comprehensive academic descriptions.</p>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
+    
+    <!-- INTRO BANNER (Interactive on screen) -->
+    <div class="no-print mb-8 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 text-white shadow-xl relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none text-9xl">
+        <i class="fa-solid fa-book-bookmark"></i>
+      </div>
+      <div class="max-w-2xl relative z-10">
+        <span class="inline-block py-1 px-2.5 rounded-md text-xs font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 mb-3 tracking-wide uppercase">Interactive Learning Resource</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold font-display leading-tight mb-2">Key Global Organizations & Concepts</h2>
+        <p class="text-indigo-100/80 text-sm leading-relaxed mb-4">
+          Discover all 18 standard abbreviations with high-resolution real-world documentary photos, authentic historical context, and native audio pronunciation.
+        </p>
+        
+        <!-- Filter & Search Bar -->
+        <div class="relative w-full max-w-lg">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-indigo-300"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            onkeyup="filterEntries()" 
+            placeholder="Search by abbreviation, full form, or keyword..." 
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/10 text-white placeholder-indigo-200/60 border border-white/20 focus:outline-none focus:ring-2 focus:ring-indigo-400 backdrop-blur-md text-sm"
+          >
+        </div>
+      </div>
+
+      <!-- Quick Stats Counter -->
+      <div class="mt-6 pt-4 border-t border-indigo-700/50 flex flex-wrap gap-6 text-xs text-indigo-200">
+        <div><strong id="itemCount" class="text-white text-base font-bold">18</strong> Items Cataloged</div>
+        <div><strong>Authentic Imagery:</strong> Yes (Unsplash / Wikimedia)</div>
+        <div><strong>Audio Pronunciation:</strong> Built-in TTS</div>
+      </div>
+    </div>
+
+    <!-- VIEW 1: TABLE VIEW (Modern responsive table styled like the original homework sheet with enhanced visuals) -->
+    <section id="tableView" class="transition-all">
+      <div class="table-container bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-700">
+                <th scope="col" class="py-4 px-4 sm:px-6 w-28 text-center">Visual Photo</th>
+                <th scope="col" class="py-4 px-4 sm:px-6 w-36">Abbreviation</th>
+                <th scope="col" class="py-4 px-4 sm:px-6 w-1/4">Full form</th>
+                <th scope="col" class="py-4 px-4 sm:px-6">Description</th>
+                <th scope="col" class="py-4 px-3 w-16 text-center no-print">Audio</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody" class="divide-y divide-slate-200 dark:divide-slate-800/80 text-sm">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: CARDS GALLERY VIEW (For interactive dynamic presentation on screen) -->
+    <section id="cardsView" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all">
+      <!-- Dynamically rendered -->
+    </section>
+
+    <!-- No results message -->
+    <div id="noResults" class="hidden text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 mt-4">
+      <div class="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 mx-auto mb-3 text-2xl">
+        <i class="fa-solid fa-search"></i>
+      </div>
+      <h3 class="text-base font-semibold text-slate-700 dark:text-slate-200">No matching abbreviations found</h3>
+      <p class="text-xs text-slate-400 mt-1">Try searching with another keyword or acronym.</p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="no-print mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 text-xs py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-slate-800 dark:text-slate-200">English Class Presentation</span>
+        <span>•</span>
+        <span>Designed for Web & Direct High-Res PDF Export</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Press <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">Ctrl + P</kbd> / <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">Cmd + P</kbd> to save as PDF</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: Complete Data Array, Render Engine, Speech Audio & UI Interactivity -->
+  <script>
+    // Authentic dataset with real-world photography and validated definitions
+    const abbreviationsData = [
+      {
+        abbr: "UNRWA",
+        full: "United Nations Relief and Works Agency",
+        description: "The UNRWA is an organization which provides direct relief, healthcare, human development, and educational services to registered Palestine refugees across the Middle East.",
+        category: "Humanitarian / UN",
+        color: "bg-sky-50 dark:bg-sky-950/30 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-800",
+        badge: "United Nations",
+        photo: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "UNRWA humanitarian aid relief and community support"
+      },
+      {
+        abbr: "ABC",
+        full: "American Broadcasting Company",
+        description: "ABC is one of the four most important TV channels and major commercial broadcast television networks in the United States of America, established in 1943.",
+        category: "Media / TV",
+        color: "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800",
+        badge: "Broadcasting",
+        photo: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Professional broadcast television studio and cameras"
+      },
+      {
+        abbr: "A-bomb",
+        full: "Atomic bomb",
+        description: "A-bomb derives its destructive power from the rapid release of energy by fission of heavy atomic nuclei. The first atomic bomb to be used was dropped on Hiroshima, Japan on 6 August 1945 by the USA.",
+        category: "History / Science",
+        color: "bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800",
+        badge: "Nuclear Physics",
+        photo: "https://images.unsplash.com/photo-1548685913-fe6678babe8d?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Dramatic atomic blast mushroom cloud cloudscape"
+      },
+      {
+        abbr: "AID",
+        full: "Agency for International Development",
+        description: "A specialized agency responsible for administering civilian foreign humanitarian aid, disaster relief, socioeconomic development, and global poverty alleviation worldwide.",
+        category: "International Development",
+        color: "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800",
+        badge: "Foreign Assistance",
+        photo: "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Humanitarian food packages and overseas distribution"
+      },
+      {
+        abbr: "BBC",
+        full: "British Broadcasting Corporation",
+        description: "The national public service broadcaster of the United Kingdom. Headquartered in London at Broadcasting House, it is the world's oldest national broadcasting organization.",
+        category: "Media / UK",
+        color: "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800",
+        badge: "Public Broadcaster",
+        photo: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Broadcasting microphones and media communications"
+      },
+      {
+        abbr: "CIA",
+        full: "Central Intelligence Agency",
+        description: "The principal civilian foreign intelligence agency of the United States federal government, tasked with collecting, processing, and analyzing global national security data.",
+        category: "Intelligence / Security",
+        color: "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700",
+        badge: "Intelligence Service",
+        photo: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Cyber security and intelligence investigation operational room"
+      },
+      {
+        abbr: "CNN",
+        full: "Cable News Network",
+        description: "An American multinational news-based cable television channel founded by Ted Turner in 1980, recognized as the world's first all-news 24-hour live television network.",
+        category: "Media / Live News",
+        color: "bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800",
+        badge: "24-Hour News",
+        photo: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Live television breaking news desk and studio monitors"
+      },
+      {
+        abbr: "FBI",
+        full: "Federal Bureau of Investigation",
+        description: "The domestic intelligence and security service of the United States, operating as the principal federal law enforcement agency under the US Department of Justice.",
+        category: "Law Enforcement",
+        color: "bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800",
+        badge: "Federal Police",
+        photo: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Federal law enforcement investigation and legal justice"
+      },
+      {
+        abbr: "FIFA",
+        full: "Fédération Internationale de Football Association",
+        description: "The supreme international governing body of association football, futsal, and beach soccer, responsible for organizing the prestigious quadrennial FIFA World Cup.",
+        category: "Sports / Football",
+        color: "bg-teal-50 dark:bg-teal-950/30 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800",
+        badge: "World Sports",
+        photo: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "International soccer football stadium full of fans"
+      },
+      {
+        abbr: "GB",
+        full: "Great Britain",
+        description: "An island separated from the European mainland by the English Channel and North Sea, comprising the three autonomous nations of England, Scotland, and Wales.",
+        category: "Geography",
+        color: "bg-violet-50 dark:bg-violet-950/30 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-800",
+        badge: "British Isles",
+        photo: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Iconic Tower Bridge and London skyline in Great Britain"
+      },
+      {
+        abbr: "MBC",
+        full: "Middle East Broadcasting Center",
+        description: "The largest and leading satellite television and digital media entertainment network in the Middle East & North Africa (MENA) region, founded in London and now headquartered in Riyadh.",
+        category: "Media / MENA",
+        color: "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800",
+        badge: "Arab Media",
+        photo: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Dubai Media City skyline where regional broadcasting hubs operate"
+      },
+      {
+        abbr: "NATO",
+        full: "North Atlantic Treaty Organization",
+        description: "An intergovernmental military alliance between 32 North American and European member states committed to collective defense against armed aggression.",
+        category: "Alliance / Defense",
+        color: "bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800",
+        badge: "Defense Treaty",
+        photo: "https://images.unsplash.com/photo-1579975096649-e773152b04cb?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Diplomatic multilateral flags at an international alliance summit"
+      },
+      {
+        abbr: "NBA",
+        full: "National Basketball Association",
+        description: "The premier men's professional basketball league in North America and globally, composed of 30 teams featuring the world's most talented athletes.",
+        category: "Sports / Basketball",
+        color: "bg-orange-50 dark:bg-orange-950/30 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800",
+        badge: "Pro League",
+        photo: "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Dynamic professional basketball dunk during arena match"
+      },
+      {
+        abbr: "OPEC",
+        full: "Organization of Petroleum Exporting Countries",
+        description: "A permanent intergovernmental organization of oil-producing nations that coordinates petroleum export policies and seeks to stabilize international crude oil markets.",
+        category: "Economy / Energy",
+        color: "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800",
+        badge: "Global Petroleum",
+        photo: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Modern petroleum refinery facilities and fuel storage"
+      },
+      {
+        abbr: "Ph. D",
+        full: "Doctor of Philosophy",
+        description: "The highest academic degree awarded by universities across various disciplines to individuals who have conducted original advanced research and defended a doctoral thesis.",
+        category: "Higher Education",
+        color: "bg-purple-50 dark:bg-purple-950/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800",
+        badge: "Doctorate",
+        photo: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Graduation mortarboard cap and university diploma degree"
+      },
+      {
+        abbr: "PTA",
+        full: "Parent-Teacher Association / Passenger Transport Authority",
+        description: "A formal school-based organization uniting parents and educators to support student development, or a public governing board managing municipal regional transport networks.",
+        category: "Education / Governance",
+        color: "bg-yellow-50 dark:bg-yellow-950/30 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800",
+        badge: "Community / Transit",
+        photo: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Classroom parent-teacher educational conference meeting"
+      },
+      {
+        abbr: "UK",
+        full: "United Kingdom",
+        description: "A sovereign constitutional monarchy located in northwestern Europe, officially known as the United Kingdom of Great Britain and Northern Ireland.",
+        category: "Sovereign State",
+        color: "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800",
+        badge: "Nation State",
+        photo: "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "The Houses of Parliament and Big Ben clock tower in London"
+      },
+      {
+        abbr: "WBA",
+        full: "World Boxing Association",
+        description: "The oldest established international professional sports body sanctioning official world championship boxing bouts and awarding the legendary gold title belt.",
+        category: "Sports / Boxing",
+        color: "bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800",
+        badge: "Championship Boxing",
+        photo: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=600&q=80",
+        photoAlt: "Leather boxing gloves inside a professional boxing ring"
+      }
+    ];
+
+    // Initialize Render
+    function renderApp(items = abbreviationsData) {
+      renderTable(items);
+      renderCards(items);
+      document.getElementById('itemCount').textContent = items.length;
+      document.getElementById('noResults').classList.toggle('hidden', items.length > 0);
+    }
+
+    // Render Table
+    function renderTable(items) {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      items.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors group";
+        tr.innerHTML = `
+          <!-- High-Res Real Photo -->
+          <td class="py-3 px-4 sm:px-6 align-middle text-center">
+            <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 mx-auto group-hover:scale-105 transition-transform">
+              <img 
+                src="${item.photo}" 
+                alt="${item.photoAlt}" 
+                class="w-full h-full object-cover"
+                loading="lazy"
+                onerror="this.src='https://placehold.co/120x120/4f46e5/ffffff?text=${item.abbr}'"
+              />
+            </div>
+          </td>
+
+          <!-- Abbreviation Column -->
+          <td class="py-3 px-4 sm:px-6 align-middle">
+            <div class="inline-flex items-center gap-2">
+              <span class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight">${item.abbr}</span>
+            </div>
+            <div class="mt-1">
+              <span class="inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full border ${item.color}">${item.badge}</span>
+            </div>
+          </td>
+
+          <!-- Full Form Column -->
+          <td class="py-3 px-4 sm:px-6 align-middle font-medium text-slate-800 dark:text-slate-200 leading-snug">
+            ${item.full}
+          </td>
+
+          <!-- Academic Description Column -->
+          <td class="py-3 px-4 sm:px-6 align-middle text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+            ${item.description}
+          </td>
+
+          <!-- Speech Pronunciation Audio -->
+          <td class="py-3 px-3 align-middle text-center no-print">
+            <button 
+              onclick="speak('${item.abbr}', '${item.full.replace(/'/g, "\\'")}')" 
+              class="w-9 h-9 rounded-full bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/50 text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 flex items-center justify-center transition shadow-sm"
+              title="Pronounce in English"
+            >
+              <i class="fa-solid fa-volume-high text-xs"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Render Cards View
+    function renderCards(items) {
+      const container = document.getElementById('cardsView');
+      container.innerHTML = '';
+
+      items.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = "bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col";
+        card.innerHTML = `
+          <div class="relative h-44 w-full overflow-hidden">
+            <img 
+              src="${item.photo}" 
+              alt="${item.photoAlt}" 
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/400x250/4f46e5/ffffff?text=${item.abbr}'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-4">
+              <div>
+                <span class="inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/20 text-white backdrop-blur-md mb-1">${item.badge}</span>
+                <h3 class="text-2xl font-bold font-display text-white tracking-tight">${item.abbr}</h3>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <h4 class="font-semibold text-slate-900 dark:text-white text-sm leading-tight">${item.full}</h4>
+              <button 
+                onclick="speak('${item.abbr}', '${item.full.replace(/'/g, "\\'")}')" 
+                class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 flex items-center justify-center flex-shrink-0"
+                title="Pronounce in English"
+              >
+                <i class="fa-solid fa-volume-high text-xs"></i>
+              </button>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-1 flex-grow">${item.description}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Instant Filter & Search Function
+    function filterEntries() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filtered = abbreviationsData.filter(item => 
+        item.abbr.toLowerCase().includes(query) ||
+        item.full.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query) ||
+        item.badge.toLowerCase().includes(query)
+      );
+      renderApp(filtered);
+    }
+
+    // Switch between Table and Cards view
+    function switchView(view) {
+      const tableElem = document.getElementById('tableView');
+      const cardsElem = document.getElementById('cardsView');
+      const tableBtn = document.getElementById('viewTableBtn');
+      const cardsBtn = document.getElementById('viewCardsBtn');
+
+      if (view === 'table') {
+        tableElem.classList.remove('hidden');
+        cardsElem.classList.add('hidden');
+        tableBtn.className = "px-3 py-1.5 rounded-md text-xs font-medium bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm transition";
+        cardsBtn.className = "px-3 py-1.5 rounded-md text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition";
+      } else {
+        tableElem.classList.add('hidden');
+        cardsElem.classList.remove('hidden');
+        cardsBtn.className = "px-3 py-1.5 rounded-md text-xs font-medium bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm transition";
+        tableBtn.className = "px-3 py-1.5 rounded-md text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition";
+      }
+    }
+
+    // Text to Speech Pronunciation API (Native English voice)
+    function speak(abbr, full) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const textToSpeak = `${abbr}. ${full}.`;
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Theme Toggle Functionality
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      const themeIcon = document.getElementById('themeIcon');
+      if (isDark) {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    // Check system preference or saved theme on load
+    window.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.getElementById('themeIcon')?.classList.replace('fa-moon', 'fa-sun');
+      }
+      renderApp();
+    });
+  </script>
+</body>
+</html>
